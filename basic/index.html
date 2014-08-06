@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<html>
+<body>
+<div>Page loading</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/mithril/0.1.19/mithril.min.js"></script>
+<script>
+var navigation = {
+    controller: function(){},
+    view: function(controller){
+      return m("ul#navigation", [
+        m("li", m("a[href='/basic/']", {config: m.route}, "home")),
+        m("li", m("a[href='/basic/todo']", {config: m.route}, "todo"))
+      ]);
+    }
+}
+
+var home = {
+  controller: function(){},
+  view: function(controller) {
+    return [
+      navigation.view(),
+      m("div#content", [
+        m("h1#title", "Home"),
+        m("p", "Lorem ipsum bla bla bla")
+      ])  
+    ];
+  }
+};
+
+var todo = {
+  controller: function () {
+      var self = this;
+      self.todos = ['one', 'two'];
+      self.newItem = m.prop('');
+      self.log = m.prop('');
+      self.submit = function(){
+          self.todos.push(self.newItem());
+          self.newItem('');
+      }
+  },
+
+  view: function (ctrl) {
+    return [
+      navigation.view(),
+      m("div#content", [
+        m("h1#title", "Todo"),
+        m('ul', ctrl.todos.map(function(item){
+          return m('li', item);
+        })),
+        m('input', { value: ctrl.newItem(), onchange: m.withAttr('value', ctrl.newItem ) }),
+        m('button', {onclick: ctrl.submit}, 'Submit')
+      ])
+    ];
+  }
+};
+
+m.route.mode = "pathname";
+
+m.route(document.body, "/basic/", {
+    "/basic/": home,
+    "/basic/todo": todo,
+});
+</script>
+</body>
+</html>
