@@ -404,8 +404,8 @@ Mithril = m = new function app(window) {
 			}
 			var listener = m.route.mode == "hash" ? "onhashchange" : "onpopstate"
 			window[listener] = function() {
-				if (currentRoute != normalizeRoute(window.location[m.route.mode])) {
-					redirect(window.location[m.route.mode])
+				if (currentRoute != normalizeRoute(location[m.route.mode])) {
+					redirect(location[m.route.mode])
 				}
 			}
 			computePostRedrawHook = setScroll
@@ -415,7 +415,7 @@ Mithril = m = new function app(window) {
 			var element = arguments[0]
 			var isInitialized = arguments[1]
 			if (element.href.indexOf(modes[m.route.mode]) < 0) {
-				element.href = window.location.pathname + modes[m.route.mode] + element.pathname
+				element.href = location.pathname + modes[m.route.mode] + element.pathname
 			}
 			if (!isInitialized) {
 				element.removeEventListener("click", routeUnobtrusive)
@@ -436,7 +436,7 @@ Mithril = m = new function app(window) {
 				}
 				redirect(modes[m.route.mode] + currentRoute)
 			}
-			else window.location[m.route.mode] = currentRoute
+			else location[m.route.mode] = currentRoute
 		}
 	}
 	m.route.param = function(key) {return routeParams[key]}
@@ -484,7 +484,7 @@ Mithril = m = new function app(window) {
 		m.route(e.currentTarget[m.route.mode].slice(modes[m.route.mode].length))
 	}
 	function setScroll() {
-		if (m.route.mode != "hash" && window.location.hash) window.location.hash = window.location.hash
+		if (m.route.mode != "hash" && location.hash) location.hash = location.hash
 		else window.scrollTo(0, 0)
 	}
 	function buildQueryString(object, prefix) {
