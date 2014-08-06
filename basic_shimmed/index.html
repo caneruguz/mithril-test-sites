@@ -3,7 +3,7 @@
 <html>
 <body>
 <div>Page loading</div>
-<script src="//cdnjs.cloudflare.com/ajax/libs/mithril/0.1.19/mithril.min.js"></script>
+<script src="mithril.min.js"></script>
 <script>
 var navigation = {
     controller: function(){},
@@ -23,7 +23,7 @@ var home = {
       m("div#content", [
         m("h1#title", "Home"),
         m("p", "Lorem ipsum bla bla bla")
-      ])  
+      ])
     ];
   }
 };
@@ -58,8 +58,8 @@ var todo = {
 m.route.mode = "pathname";
 
 m.route(document.body, "/basic/", {
-    "/basic/": home,
-    "/basic/todo": todo,
+    "/#/basic/": home,
+    "/#/basic/todo": todo,
 });
 </script>
 </body>

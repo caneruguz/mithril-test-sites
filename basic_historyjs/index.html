@@ -3,7 +3,7 @@
 <html>
 <body>
 <div>Page loading</div>
-<script type="text/javascript" src="history.js"></script>
+<script type="text/javascript" src="history.js?/basic/"></script>
 <script type="text/javascript" src="mithril.js"></script>
 
 <script>
@@ -60,8 +60,8 @@ var todo = {
 m.route.mode = "pathname";
 
 m.route(document.body, "/basic/", {
-    "/basic/": home,
-    "/basic/todo": todo,
+    "/#/basic/": home,
+    "/#/basic/todo": todo,
 });
 </script>
 </body>
