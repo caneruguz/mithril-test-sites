@@ -7,6 +7,9 @@
 <script src="//browserstate.github.io/history.js/scripts/bundled/html4+html5/jquery.history.js"></script>
 <script src="http://mithril-test.cos.io/basic_shimmed/mithril.min.js"></script>
 <script>
+if (!window.history) {
+  window.history = History;
+}
 var navigation = {
     controller: function(){},
     view: function(controller){
