@@ -3,7 +3,7 @@
 <html>
 <body>
 <div>Page loading</div>
-<script type="text/javascript" src="history.js?/basic/"></script>
+<script type="text/javascript" src="history.js"></script>
 <script type="text/javascript" src="mithril.js"></script>
 
 <script>
@@ -11,8 +11,8 @@ var navigation = {
     controller: function(){},
     view: function(controller){
       return m("ul#navigation", [
-        m("li", m("a[href='/basic/']", {config: m.route}, "home")),
-        m("li", m("a[href='/basic/todo']", {config: m.route}, "todo"))
+        m("li", m("a[href='/basic_historyjs/']", {config: m.route}, "home")),
+        m("li", m("a[href='/basic_historyjs/todo']", {config: m.route}, "todo"))
       ]);
     }
 }
@@ -59,9 +59,9 @@ var todo = {
 
 m.route.mode = "pathname";
 
-m.route(document.body, "/basic/", {
-    "/#/basic/": home,
-    "/#/basic/todo": todo,
+m.route(document.body, "/basic_historyjs/", {
+    "/basic_historyjs/": home,
+    "/basic_historyjs/todo": todo,
 });
 </script>
 </body>
