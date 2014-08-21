@@ -34,6 +34,9 @@ https://github.com/theintern/intern/wiki/Configuring-Intern
 Documentatino for Leadfoot can be found here:
 https://theintern.github.io/leadfoot/Element.html
 
+To run sauce labs you can add the following alias:
+
+```alias sauce="SAUCE_USERNAME=YOUR_USERNAME SAUCE_ACCESS_KEY=YOUR_ACCESS_KEY ./node_modules/.bin/intern-runner config=tests/intern"```
 
 
 
