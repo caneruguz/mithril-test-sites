@@ -21,12 +21,13 @@ Basic mithril application plus history.js routing
 #### Install
 run 
 
-   ```npm install```
+      npm install
    
 
 #### Testing 
 
-This testing environment uses Intern.js. Make changes to the Intern.js configuration file located at: ```./tests/intern.js```
+This testing environment uses Intern.js. Make changes to the Intern.js configuration file located at:
+      ./tests/intern.js
 
 More informatin about what to change in this file:
 https://github.com/theintern/intern/wiki/Configuring-Intern
@@ -36,21 +37,36 @@ https://theintern.github.io/leadfoot/Element.html
 
 *Using SauceLabs*
 
-To run sauce labs you can add the following alias:
+To run sauce labs uncomment the following and make sure you comment out browserstack or local testing lines
 
-```alias sauce="SAUCE_USERNAME=YOUR_USERNAME SAUCE_ACCESS_KEY=YOUR_ACCESS_KEY ./node_modules/.bin/intern-runner config=tests/intern"```
+      tunnel: 'SauceLabsTunnel',
 
 *Using BrowserStack*
 
 To use BrowserStack you need to add this line for your tunnel in ```./tests/inter.js``` (comment out other tunnel variables)
 
-```tunnel: 'BrowserStackTunnel',```
+      tunnel: 'BrowserStackTunnel',
 
+**Running Tests**
 
-And use env variables, so add these to your bash profile or ~/.zshrc
+Run the tests with the following command in Terminal:
 
-    ```//# BrowserStack environment variables
-    //export BROWSERSTACK_USERNAME="YOUR_USERNAME"
-    //export BROWSERSTACK_ACCESS_KEY="YOUR_KEY"```
+      ./node_modules/.bin/intern-runner config=tests/intern"
 
+For convenience you can add the env variables and an alias to your bash profile or ~/.zshrc; so that you can get your tests running regardless of your testing location
 
+      # BrowserStack environment variables 
+      export BROWSERSTACK_USERNAME="YOUR_USERNAME"
+      export BROWSERSTACK_ACCESS_KEY="YOUR_KEY"
+
+      # SauceLabs environment variables
+      export SAUCE_USERNAME="YOUR_USERNAME"
+      export SAUCE_ACCESS_KEY="YOUR_KEY"
+
+Alias for running tests 
+
+      alias intern="./node_modules/.bin/intern-runner config=tests/intern"
+
+After that all you need to do is change your environment variables and type this to start testing :
+
+      intern
