@@ -19,6 +19,9 @@
     "intern-geezer": "^2.0.1"
   },
   "dependencies": {
-    "mithril": "^0.1.20"
+    "browserify": "^5.10.1",
+    "es5-shim": "^4.0.3",
+    "mithril": "^0.1.20",
+    "watchify": "^1.0.2"
   }
 }
