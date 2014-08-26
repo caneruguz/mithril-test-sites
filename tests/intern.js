@@ -16,9 +16,8 @@ define({
 	// automatically
 	capabilities: {
 		'selenium-version': '2.41.0',
-        'name' : 'mithril testing ',
-        'elementScrollBehavior' : 0
-	},
+        'name' : 'mithril testing '
+    },
 
 	// Browsers to run integration testing against. Note that version numbers must be strings if used with Sauce
 	// OnDemand. Options that will be permutated are browserName, version, platform, and platformVersion; any other
@@ -30,17 +29,17 @@ define({
         // SauceLabs
 //		{ browserName: 'internet explorer', version: '11', platform: 'Windows 8.1' },
 //		{ browserName: 'internet explorer', version: '10', platform: 'Windows 8' },
-		{ browserName: 'internet explorer', version: '9', platform: 'Windows 7' },
+//		{ browserName: 'internet explorer', version: '9', platform: 'Windows 7' },
 //        { browserName: 'internet explorer', version: '8', platform: 'Windows 7' },
-
+//
 //		{ browserName: 'firefox', version: '28', platform: [ 'OS X 10.9', 'Windows 7', 'Linux' ] },
 //		{ browserName: 'chrome', version: '34', platform: [ 'OS X 10.9', 'Windows 7', 'Linux' ] },
 //		{ browserName: 'chrome', version: '36', platform: [ 'OS X 10.9', 'Windows 7', 'Linux' ] },
-//		{ browserName: 'safari', version: '6', platform: 'OS X 10.8' },
-//		{ browserName: 'safari', version: '7', platform: 'OS X 10.9' }
+		{ browserName: 'safari', version: '6', platform: 'OS X 10.8' },
+		{ browserName: 'safari', version: '7', platform: 'OS X 10.9' }
 
         // BroserStack
-        // uding default latest
+        // using default latest
 //        { browserName: 'chrome', 'browserstack.debug' : true},
 //        { browserName: 'safari', version: '6', platform: 'MAC', 'browserstack.debug' : true},
 //        { browserName: 'safari', 'browserstack.debug' : true},
@@ -48,7 +47,6 @@ define({
 //        { browserName : 'internet explorer', version : '9', 'browserstack.debug' : true},
 //        { browserName : 'internet explorer', version : '10', 'browserstack.debug' : true},
 //        { browserName : 'internet explorer', 'browserstack.debug' : true}
-
 //        { browserName : 'firefox', 'browserstack.debug' : true}
 
 
@@ -63,6 +61,11 @@ define({
 	tunnel: 'SauceLabsTunnel',
 //    tunnel: 'BrowserStackTunnel',
 
+    // Tunnel Options, are different for Sauce and BStack but verbose works with both.
+    // Documentation : https://theintern.github.io/digdug/index.html
+    tunnelOptions : {
+        verbose : false
+    },
 	// The desired AMD loader to use when running unit tests (client.html/client.js). Omit to use the default Dojo
 	// loader
 	useLoader: {
@@ -81,8 +84,11 @@ define({
 	suites: [ /* 'myPackage/tests/foo', 'myPackage/tests/bar' */ ],
 
 	// Functional test suite(s) to run in each browser once non-functional tests are completed
-	functionalSuites: [ 'myPackage/tests/functional/test' ],
+	// Basic mithril
+//    functionalSuites: [ 'myPackage/tests/functional/test' ],
+    // Browserify
+      functionalSuites: [ 'myPackage/tests/functional/test' ],
 
-	// A regular expression matching URLs to files that should not be included in code coverage analysis
+    // A regular expression matching URLs to files that should not be included in code coverage analysis
 	excludeInstrumentation: /^(?:tests|node_modules)\//
 });

@@ -35,15 +35,15 @@ logs.view = function(controller){
         m("table.table.table-condensed", [
             m("tbody", [
                 logs.List().map(function(log, index){
-                    return m("tr", [
+                    return m("tr.log-row", [
                         m("td", [
                             m("span.text-muted", log.logDate)
                         ]),
                         m("td", [
-                            m("b", log.logUser),
+                            m("a[href='user/1']", log.logUser),
                             " ",
                             m("span.logText", log.logText),
-                            m("i", log.logContent),
+                            m("i.logContent", log.logContent),
                             ".\n                        "
                         ])
                     ])

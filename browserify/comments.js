@@ -67,11 +67,12 @@ comments.controller = function (){
 }
 
 // Loads commenting form and list of comments
+// Loads commenting form and list of comments
 comments.view = function(ctrl){
     return m(".container-fluid", [m(".row", [
         m(".col-sm-12", [
             m(".col-xs-12[id='cm-comment']", [
-                m("input.form-control.input-sm[placeholder='filter'][type='text']", { onkeyup: ctrl.runFilter, value : ctrl.filterText()} )
+                m("input.#filter.form-control.input-sm[placeholder='filter'][type='text']", { onkeyup: ctrl.runFilter, value : ctrl.filterText()} )
             ]),
             m("hr"),
             m("[id='cm-boxWrapper']", [
@@ -80,7 +81,7 @@ comments.view = function(ctrl){
                         m("textarea.ht-comment-box", {onchange: m.withAttr("value", ctrl.content), value: ctrl.content()})
                     ]),
                     m(".col-xs-3", [
-                        m("button.btn.btn-default.btn-block.btn-lg", {onclick: ctrl.add}, " Add ")
+                        m("button#addComment.btn.btn-default.btn-block.btn-lg", {onclick: ctrl.add}, " Add ")
                     ])
                 ]),
                 m(".row", [
@@ -89,11 +90,11 @@ comments.view = function(ctrl){
                             m("tbody", [
                                 ctrl.comments().map(function(comment, index){
                                     if(comment.show){
-                                        return m("tr", [
+                                        return m("tr.commentRow", [
                                             m("td", [
                                                 m("b", comment.username)
                                             ]),
-                                            m("td", comment.content),
+                                            m("td.commentContent", comment.content),
                                             m("td", [
                                                 m("span.text-muted", comment.date)
                                             ])
