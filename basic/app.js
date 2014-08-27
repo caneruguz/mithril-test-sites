@@ -120,9 +120,7 @@
             this.runFilter = function(e){
                 var event = e || window.event; //IE does not pass the event object
                 m.withAttr("value", self.filterText)(event);
-                console.log(self.comments())
                 self.filter();
-                console.log("==")
             }
         }
 

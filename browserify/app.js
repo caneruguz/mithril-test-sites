@@ -6,7 +6,7 @@ app.logs = require('./logs');
 app.comments = require('./comments')
 app.wiki = require('./wiki')
 
-
 m.module(document.getElementById('logs'), app.logs);
 m.module(document.getElementById('comments'), app.comments);
 m.module(document.getElementById('wiki'), app.wiki);
+

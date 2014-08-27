@@ -27,6 +27,7 @@
 body {
     font-family: Helvetica;
     width: 100%;
+    overflow: hidden;
     background: #eee;
 }
 .bg-blue {
@@ -406,8 +407,8 @@ body {
     margin-bottom: 20px;
     padding: 10px;
 }
+
 .links a {
-    padding: 5px 5px;
+    padding: 5px 15px;
     text-decoration: none;
-    margin-right: 10px;
 }
