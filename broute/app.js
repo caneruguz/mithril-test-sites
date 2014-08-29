@@ -45,13 +45,12 @@ app.pages.controller = function(pageId) {
 }
 
 app.pages.view = function(ctrl) {
-    console.log(ctrl.pageInfo())
     if(ctrl.pageId() === 0 ){
         return m("div", "Page info did not load")
     } else {
         return ctrl.pageInfo().map(function(item, index, array){
                 if(item.id === ctrl.pageId()){
-                    return [ m('h1', item.title), m('p', item.content), ];
+                    return [ m('h1#pageTitle', item.title), m('p', item.content), ];
                 }
         });
     }
@@ -100,8 +99,12 @@ var item = {
             m('.box', links),
             m('.box', app.pages.view(ctrl.page)),
             m('.box',[
-                m('h4', "ID : " +  m.route.param("id") ),
-                m('h4', "Title : " +  m.route.param("title") )
+                m('h4',
+                        [m('span', "ID : "), m('span.#param_id',m.route.param("id") )]
+                ),
+                m('h4',
+                    [m('span', "Title : "), m('span.#param_title',m.route.param("title") )]
+                )
             ])
         ])
     }

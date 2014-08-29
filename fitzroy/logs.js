@@ -3,7 +3,7 @@ var logs = {};
 
 // Assign model directly to loaded content
 logs.List = m.prop("")
-m.request({method: "GET", url: "/broute/logs.json"}).then(logs.List);
+m.request({method: "GET", url: "./logs.json"}).then(logs.List);
 
 // Model for individual logs
 logs.singleLog = function(logType, logContent){

@@ -35,9 +35,47 @@ define([
                 });
         },
 
+        'clicking home navigates to home AND shows content': function() {
+            return this.get('remote').get(require.toUrl(appUrl))
+                .findByLinkText('Home').click().end()
+                .setFindTimeout(3000)
+                .findById('pageTitle')
+                .getVisibleText()
+                .then(function(text){
+                    assert.strictEqual(text, 'App Page',
+                        'Home Title should say "App Page", returned instead : ' + text );
+                })
+        },
+
+        'clicking about navigates to about page AND shows content': function() {
+            return this.get('remote').get(require.toUrl(appUrl))
+                .findByLinkText('About').click().end()
+                .setFindTimeout(3000)
+                .findById('pageTitle')
+                .getVisibleText()
+                .then(function(text){
+                    assert.strictEqual(text, 'About Page',
+                            'About Title should say "About Page", returned instead : ' + text );
+                })
+        },
+
+        'clicking item example navigates to item example AND shows content': function() {
+            return this.get('remote').get(require.toUrl(appUrl))
+                .findByLinkText('Item Example').click().end()
+                .setFindTimeout(3000)
+                .findById('pageTitle')
+                .getVisibleText()
+                .then(function(text){
+                    assert.strictEqual(text, 'Checking Route parameters',
+                            'Item Example Title should say "Checking Route parameters", returned instead : ' + text );
+                })
+        },
+
         // item returns param ID
         'item returns param ID ': function() {
-            return this.get('remote').get(appUrl)
+            return this.get('remote').get(require.toUrl(appUrl))
+                .setFindTimeout(4000)
+                .findByLinkText('Item Example').click().end()
                 .setFindTimeout(4000)
                 .findById('param_id')
                 .getVisibleText()
@@ -48,8 +86,9 @@ define([
 
         // Item returns param Title
             'item returns param title ': function() {
-                return this.get('remote').get(appUrl)
+                return this.get('remote').get(require.toUrl(appUrl))
                     .setFindTimeout(4000)
+                    .findByLinkText('Item Example').click().end()
                     .findById('param_title')
                     .getVisibleText()
                     .then(function (data) {
