@@ -1,0 +1,25 @@
+{
+  "name": "mithril-test",
+  "version": "0.0.1",
+  "homepage": "https://github.com/caneruguz/mithril-test-sites",
+  "authors": [
+    "Caner Uguz <caneruguz@gmail.com>"
+  ],
+  "description": "Mithril Testing",
+  "keywords": [
+    "mithril"
+  ],
+  "license": "Apache 2",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "history.js": "~1.8.0",
+    "jquery": "~1.9.1"
+  }
+}

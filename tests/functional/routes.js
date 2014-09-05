@@ -9,7 +9,7 @@ define([
         return remote.environmentType.browserName;
     };
     registerSuite({
-        name: 'routes',
+        name: 'Mithril Routes Testing',
 
         'clicking home navigates to home': function() {
             return this.get('remote').get(require.toUrl(appUrl))
