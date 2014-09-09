@@ -46,7 +46,6 @@ app.pages.controller = function(pageId) {
 }
 
 app.pages.view = function(ctrl) {
-    console.log("Pages rendered with controller: ", ctrl);
     if(ctrl.pageId() === 0 ){
         return m("div", "Page info did not load")
     } else {
@@ -68,7 +67,6 @@ var home = {
         this.wiki = new app.wiki.controller();
     },
     view : function(ctrl) {
-        console.log("Home rendered with controller: ", ctrl);
         return m('#container', [
             m('.box', links),
             m('.box', app.pages.view(ctrl.page)),
@@ -118,11 +116,9 @@ router.base = '';
 var indexPage = function(){
 
     m.module(document.getElementById('wrapper'), home)
-    console.log("index")
 };
-var aboutPage = function(){ 
+var aboutPage = function(){
     m.module(document.getElementById('wrapper'), about)
-    console.log("about")
 
 };
 var itemPage  = function(context, bindings){
@@ -134,13 +130,17 @@ var itemPage  = function(context, bindings){
     }
     var controller = new item.controller(bindings);
     m.render(document.getElementById('wrapper'), item.view(controller))
-    console.log("item")
 
 };
 router.add('./', indexPage, {});
 router.add('/', indexPage, {});
 router.add('/about', aboutPage, {});
 router.add('/item/:id/:title', itemPage, {});
+
+router.add('/fitzroy/', indexPage, {});
+router.add('/fitzroy/about', aboutPage, {});
+router.add('/fitzroy/item/:id/:title', itemPage, {});
+
 
 $(document).ready(function(){
     router.ajaxify(window.document.body);
@@ -171,7 +171,7 @@ comments.comment = function(content){
 comments.controller = function (){
     var self = this;
     this.comments = m.prop("");
-    m.request({method: "GET", url: "./comments.json"}).then(this.comments);
+    m.request({method: "GET", url: "/fitzroy/comments.json"}).then(this.comments);
     // Filter search term to use for filtering later.
     this.filterText = m.prop("");
     // Declare and empty setter for content of the comment to bind it to the form.
@@ -277,7 +277,7 @@ var logs = {};
 
 // Assign model directly to loaded content
 logs.List = m.prop("")
-m.request({method: "GET", url: "./logs.json"}).then(logs.List);
+m.request({method: "GET", url: "/fitzroy/logs.json"}).then(logs.List);
 
 // Model for individual logs
 logs.singleLog = function(logType, logContent){
@@ -346,7 +346,7 @@ wiki.data =
 wiki.controller = function(){
     var self = this;
     //this.data = m.prop();
-    this.data = m.request({method: "GET", url: './wiki.json', type : wiki.model});//.then(self.data);
+    this.data = m.request({method: "GET", url: '/fitzroy/wiki.json', type : wiki.model});//.then(self.data);
 
     this.edit = m.prop(false);
 

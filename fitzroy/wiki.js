@@ -14,7 +14,7 @@ wiki.data =
 wiki.controller = function(){
     var self = this;
     //this.data = m.prop();
-    this.data = m.request({method: "GET", url: './wiki.json', type : wiki.model});//.then(self.data);
+    this.data = m.request({method: "GET", url: '/fitzroy/wiki.json', type : wiki.model});//.then(self.data);
 
     this.edit = m.prop(false);
 

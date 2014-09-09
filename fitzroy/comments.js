@@ -17,7 +17,7 @@ comments.comment = function(content){
 comments.controller = function (){
     var self = this;
     this.comments = m.prop("");
-    m.request({method: "GET", url: "./comments.json"}).then(this.comments);
+    m.request({method: "GET", url: "/fitzroy/comments.json"}).then(this.comments);
     // Filter search term to use for filtering later.
     this.filterText = m.prop("");
     // Declare and empty setter for content of the comment to bind it to the form.

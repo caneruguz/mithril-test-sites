@@ -7,9 +7,9 @@ app.comments = require('./comments')
 app.wiki = require('./wiki')
 
 var linkList= [
-    {title: "Home", url: "/all/"},
-    {title: "About", url: "/all/about"},
-    {title: "Item Example", url: "/all/item/2/SomeTitle"}
+    {title: "Home", url: "/"},
+    {title: "About", url: "/about"},
+    {title: "Item Example", url: "/item/2/SomeTitle"}
 ];
 
 var links = m(".links", [
@@ -132,6 +132,12 @@ var itemPage  = function(context, bindings){
 //    m.module(document.getElementById('wrapper'), { controller: function(){return item.controller(bindings) }, view : item.view  })
 
 };
+
+
+router.add('./', indexPage, {});
+router.add('/', indexPage, {});
+router.add('/about', aboutPage, {});
+router.add('/item/:id/:title', itemPage, {});
 
 router.add('/all/', indexPage, {});
 router.add('/all/about', aboutPage, {});

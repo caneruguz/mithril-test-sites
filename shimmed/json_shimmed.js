@@ -600,5 +600,3 @@ if (!Array.prototype.indexOf) {
         return -1;
     };
 }
-
-console.log(JSON);

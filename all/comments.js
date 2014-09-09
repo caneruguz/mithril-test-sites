@@ -17,7 +17,7 @@ comments.comment = function(content){
 comments.controller = function (){
     var self = this;
     this.comments = m.prop("");
-    m.request({method: "GET", url: "./comments.json"}).then(this.comments);
+    m.request({method: "GET", url: "/all/comments.json"}).then(this.comments);
     // Filter search term to use for filtering later.
     this.filterText = m.prop("");
     // Declare and empty setter for content of the comment to bind it to the form.
@@ -67,15 +67,14 @@ comments.controller = function (){
 }
 
 // Loads commenting form and list of comments
-// Loads commenting form and list of comments
 comments.view = function(ctrl){
     return m(".container-fluid", [m(".row", [
         m(".col-sm-12", [
-            m(".col-xs-12[id='cm-comment']", [
-                m("input.#filter.form-control.input-sm[placeholder='filter'][type='text']", { onkeyup: ctrl.runFilter, value : ctrl.filterText()} )
+            m("div", { id : 'cm-comment'}, [
+                m("input", {  type: 'text', 'id' : 'filter', 'class' : 'form-control input-sm', onkeyup: ctrl.runFilter, value : ctrl.filterText()}, "" ),
             ]),
             m("hr"),
-            m("[id='cm-boxWrapper']", [
+            m("div[id='cm-boxWrapper']", [
                 m(".row", [
                     m(".col-xs-9", [
                         m("textarea.ht-comment-box", {onchange: m.withAttr("value", ctrl.content), value: ctrl.content()})
@@ -107,12 +106,7 @@ comments.view = function(ctrl){
                 ])
             ])
         ])
-    ]),
-        m(".col-sm-4.col-xs-12", [
-            m("[id='cm-logs']", [
-
-            ])
-        ])
+    ])
     ])
 }
 

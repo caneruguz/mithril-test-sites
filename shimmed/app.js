@@ -125,11 +125,11 @@
         comments.view = function(ctrl){
             return m(".container-fluid", [m(".row", [
                 m(".col-sm-12", [
-                    m(".col-xs-12[id='cm-comment']", [
-                        m("input.#filter.form-control.input-sm[placeholder='filter'][type='text']", { onkeyup: ctrl.runFilter, value : ctrl.filterText()} )
+                    m("div", { id : 'cm-comment'}, [
+                        m("input", {  type: 'text', 'id' : 'filter', 'class' : 'form-control input-sm', onkeyup: ctrl.runFilter, value : ctrl.filterText()}, "" ),
                     ]),
                     m("hr"),
-                    m("[id='cm-boxWrapper']", [
+                    m("div[id='cm-boxWrapper']", [
                         m(".row", [
                             m(".col-xs-9", [
                                 m("textarea.ht-comment-box", {onchange: m.withAttr("value", ctrl.content), value: ctrl.content()})
@@ -161,12 +161,7 @@
                         ])
                     ])
                 ])
-            ]),
-                m(".col-sm-4.col-xs-12", [
-                    m("[id='cm-logs']", [
-
-                    ])
-                ])
+            ])
             ])
         }
 

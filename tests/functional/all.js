@@ -3,7 +3,7 @@ define([
     'intern/assert',
     'require'
 ], function (registerSuite, assert, require) {
-    var all = 'all/';
+    var basic = 'all/';
     var scroll = "window.scrollTo(0, document.body.scrollHeight);";
     var getBrowser = function(remote) {
         return remote.environmentType.browserName;
@@ -16,7 +16,7 @@ define([
         //All good
         'wiki title does not equal undefined': function () {
             return this.get('remote')
-                .get(require.toUrl(all))
+                .get(require.toUrl(basic))
                 .setFindTimeout(500)
                 .findByClassName('panel-title')
                 .getVisibleText()
@@ -29,7 +29,7 @@ define([
         //All good
         'number of comments loaded is accurate': function () {
             return this.get('remote')
-                .get(require.toUrl(all))
+                .get(require.toUrl(basic))
                 .setFindTimeout(2000)
                 .findAllByClassName('commentRow')
                 .then(function (array) {
@@ -42,7 +42,7 @@ define([
         // All good
         'number of logs loaded is accurate': function () {
             return this.get('remote')
-                .get(require.toUrl(all))
+                .get(require.toUrl(basic))
                 .setFindTimeout(2000)
                 .findAllByClassName('log-row')
                 .then(function (array) {
@@ -56,7 +56,7 @@ define([
         //All good
         'Wiki title equals data': function () {
             return this.get('remote')
-                .get(require.toUrl(all))
+                .get(require.toUrl(basic))
                 .setFindTimeout(2000)
                 .findByClassName('panel-title')
                 .getVisibleText()
@@ -69,7 +69,7 @@ define([
         //All good
         'After wiki edit, version number is increased in view': function () {
             return this.get('remote')
-                .get(require.toUrl(all))
+                .get(require.toUrl(basic))
                 .setFindTimeout(2000)
                 .findByClassName('editWikiButton')
                 .click()
@@ -94,7 +94,7 @@ define([
             if (getBrowser(this.get('remote')) === "safari") {
                 cmd = "document.getElementsByClassName('ht-comment-box')[0].dispatchEvent(new Event('change'));";
             }
-            return this.get('remote').get(require.toUrl(all))
+            return this.get('remote').get(require.toUrl(basic))
                 .setWindowSize(1000, 900)
                 .execute(scroll)
                 .findByClassName('ht-comment-box')
@@ -107,7 +107,7 @@ define([
                 .click()
                 .end()
                 .setFindTimeout(4000)
-                .findByCssSelector('.commentRow:last-child > .commentContent ')
+                .findByCssSelector('.commentRow:first-child + .commentRow + .commentRow + .commentRow + .commentRow + .commentRow  > .commentContent ')
                 .getVisibleText()
                 .then(function (text) {
                     assert.strictEqual(text, 'My New Comment',
@@ -118,7 +118,7 @@ define([
         //All good
         'clicking “edit” on wiki turns title into editable input': function () {
             return this.get('remote')
-                .get(require.toUrl(all))
+                .get(require.toUrl(basic))
                 .setFindTimeout(2000)
                 .findByClassName('editWikiButton')
                 .click()
@@ -140,7 +140,7 @@ define([
             if (getBrowser(this.get('remote')) === "safari") {
                 cmd = "document.getElementById('filter').dispatchEvent(new Event('change'));";
             }
-            return remote.get(require.toUrl(all))
+            return remote.get(require.toUrl(basic))
                 .setFindTimeout(3000)
                 .findById('cm-comment')
                 .end()
@@ -166,7 +166,7 @@ define([
 
         'typing text to filter box shows only comments that have this text in them': function () {
             var remote =this.get('remote');
-            return remote.get(require.toUrl(all))
+            return remote.get(require.toUrl(basic))
                 .setFindTimeout(2000)
                 .findById('filter')
                 .click()
@@ -199,7 +199,7 @@ define([
         // All good
         'When wiki is changed a log is also added': function () {
             return this.get('remote')
-                .get(require.toUrl(all))
+                .get(require.toUrl(basic))
                 .setFindTimeout(2000)
                 .findByClassName('editWikiButton')
                 .click()
@@ -211,7 +211,7 @@ define([
                 .end()
                 .execute(scroll)
                 .setFindTimeout(2000)
-                .findByCssSelector('.log-row:last-child > td > .logContent')
+                .findByCssSelector('.log-row:first-child + .log-row + .log-row > td > .logContent')
                 .getVisibleText()
                 .then(function (text) {
                     assert.strictEqual(text, '2',
@@ -225,7 +225,7 @@ define([
             if (getBrowser(this.get('remote')) === "safari") {
                 cmd = "document.getElementsByClassName('ht-comment-box')[0].dispatchEvent(new Event('change'));";
             }
-            return this.get('remote').get(require.toUrl(all))
+            return this.get('remote').get(require.toUrl(basic))
                 .setWindowSize(1000, 900)
                 .execute(scroll)
                 .findByClassName('ht-comment-box')
@@ -238,7 +238,7 @@ define([
                 .click()
                 .end()
                 .setFindTimeout(4000)
-                .findByCssSelector('.log-row:last-child > td > .logContent')
+                .findByCssSelector('.log-row:first-child + .log-row + .log-row > td > .logContent')
                 .getVisibleText()
                 .then(function (text) {
                     assert.strictEqual(text, 'My New Comment',
@@ -248,7 +248,7 @@ define([
         },
 
         'clicking home navigates to home AND shows content': function() {
-            return this.get('remote').get(require.toUrl(all))
+            return this.get('remote').get(require.toUrl(basic))
                 .findByLinkText('Home').click().end()
                 .setFindTimeout(3000)
                 .findById('pageTitle')
@@ -260,7 +260,7 @@ define([
         },
 
         'clicking About navigates to about page AND shows content': function() {
-            return this.get('remote').get(require.toUrl(all))
+            return this.get('remote').get(require.toUrl(basic))
                 .findByLinkText('About').click().end()
                 .setFindTimeout(3000)
                 .findById('pageTitle')
@@ -273,7 +273,7 @@ define([
 
         // item returns param ID
         'Clicking item navigates to item page and Returns parameters accurately': function() {
-            return this.get('remote').get(require.toUrl(all))
+            return this.get('remote').get(require.toUrl(basic))
                 .setFindTimeout(4000)
                 .findByLinkText('Item Example').click().end()
                 .setFindTimeout(4000)

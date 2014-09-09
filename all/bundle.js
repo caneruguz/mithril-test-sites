@@ -8,9 +8,9 @@ app.comments = require('./comments')
 app.wiki = require('./wiki')
 
 var linkList= [
-    {title: "Home", url: "/all/"},
-    {title: "About", url: "/all/about"},
-    {title: "Item Example", url: "/all/item/2/SomeTitle"}
+    {title: "Home", url: "/"},
+    {title: "About", url: "/about"},
+    {title: "Item Example", url: "/item/2/SomeTitle"}
 ];
 
 var links = m(".links", [
@@ -134,6 +134,12 @@ var itemPage  = function(context, bindings){
 
 };
 
+
+router.add('./', indexPage, {});
+router.add('/', indexPage, {});
+router.add('/about', aboutPage, {});
+router.add('/item/:id/:title', itemPage, {});
+
 router.add('/all/', indexPage, {});
 router.add('/all/about', aboutPage, {});
 router.add('/all/item/:id/:title', itemPage, {});
@@ -142,6 +148,8 @@ $(document).ready(function(){
     router.ajaxify(window.document.body);
     router.call(router.getHash());
 });
+
+
 },{"./comments":2,"./logs":3,"./wiki":4,"mithril":5}],2:[function(require,module,exports){
 var logs = require('./logs');
 
@@ -162,7 +170,7 @@ comments.comment = function(content){
 comments.controller = function (){
     var self = this;
     this.comments = m.prop("");
-    m.request({method: "GET", url: "./comments.json"}).then(this.comments);
+    m.request({method: "GET", url: "/all/comments.json"}).then(this.comments);
     // Filter search term to use for filtering later.
     this.filterText = m.prop("");
     // Declare and empty setter for content of the comment to bind it to the form.
@@ -212,15 +220,14 @@ comments.controller = function (){
 }
 
 // Loads commenting form and list of comments
-// Loads commenting form and list of comments
 comments.view = function(ctrl){
     return m(".container-fluid", [m(".row", [
         m(".col-sm-12", [
-            m(".col-xs-12[id='cm-comment']", [
-                m("input.#filter.form-control.input-sm[placeholder='filter'][type='text']", { onkeyup: ctrl.runFilter, value : ctrl.filterText()} )
+            m("div", { id : 'cm-comment'}, [
+                m("input", {  type: 'text', 'id' : 'filter', 'class' : 'form-control input-sm', onkeyup: ctrl.runFilter, value : ctrl.filterText()}, "" ),
             ]),
             m("hr"),
-            m("[id='cm-boxWrapper']", [
+            m("div[id='cm-boxWrapper']", [
                 m(".row", [
                     m(".col-xs-9", [
                         m("textarea.ht-comment-box", {onchange: m.withAttr("value", ctrl.content), value: ctrl.content()})
@@ -252,12 +259,7 @@ comments.view = function(ctrl){
                 ])
             ])
         ])
-    ]),
-        m(".col-sm-4.col-xs-12", [
-            m("[id='cm-logs']", [
-
-            ])
-        ])
+    ])
     ])
 }
 
@@ -268,7 +270,7 @@ var logs = {};
 
 // Assign model directly to loaded content
 logs.List = m.prop("")
-m.request({method: "GET", url: "./logs.json"}).then(logs.List);
+m.request({method: "GET", url: "/all/logs.json"}).then(logs.List);
 
 // Model for individual logs
 logs.singleLog = function(logType, logContent){
@@ -337,7 +339,7 @@ wiki.data =
 wiki.controller = function(){
     var self = this;
     //this.data = m.prop();
-    this.data = m.request({method: "GET", url: './wiki.json', type : wiki.model});//.then(self.data);
+    this.data = m.request({method: "GET", url: '/all/wiki.json', type : wiki.model});//.then(self.data);
 
     this.edit = m.prop(false);
 
@@ -864,10 +866,11 @@ Mithril = m = new function app(window, undefined) {
 
 	m.withAttr = function(prop, withAttrCallback) {
 		return function(e) {
-			e = e || window.event
-			var currentTarget = e.currentTarget || this
-			withAttrCallback(prop in currentTarget ? currentTarget[prop] : currentTarget.getAttribute(prop))
-		}
+			e = e || window.event;
+//			var currentTarget = e.currentTarget || this;
+            var currentTarget  = (event.currentTarget) ? event.currentTarget : event.srcElement;
+			withAttrCallback(prop in currentTarget ? currentTarget[prop] : currentTarget.getAttribute(prop));
+        }
 	}
 
 	//routing

@@ -17,8 +17,8 @@ define({
 	capabilities: {
 		'selenium-version': '2.41.0',
         'name' : 'mithril testing ',
-        'idle-timeout' : 90,
-        "command-timeout": 600
+       "build": "build-1001"
+
     },
 
 	// Browsers to run integration testing against. Note that version numbers must be strings if used with Sauce
@@ -31,11 +31,11 @@ define({
         // SauceLabs
 //		{ browserName: 'internet explorer', version: '11', platform: 'Windows 8.1' },
 //		{ browserName: 'internet explorer', version: '10', platform: 'Windows 8' },
-		{ browserName: 'internet explorer', version: '9', platform: 'Windows 7' },
+//		{ browserName: 'internet explorer', version: '9', platform: 'Windows 7' },
 //        { browserName: 'internet explorer', version: '8', platform: 'Windows 7' },
 //        { browserName: 'internet explorer', version: '7' },
-//		{ browserName: 'firefox', version: '28', platform: [ 'OS X 10.9', 'Windows 7', 'Linux' ] },
-//		{ browserName: 'chrome', version: '34', platform: [ 'OS X 10.9', 'Windows 7', 'Linux' ] },
+//		{ browserName: 'firefox', version: '28', platform: [ 'OS X 10.9' , 'Windows 7', 'Linux' ] },
+		{ browserName: 'chrome', version: '34', platform: [ 'OS X 10.9', 'Windows 7', 'Linux' ] },
 //		{ browserName: 'safari', version: '6', platform: 'OS X 10.8' },
 //		{ browserName: 'safari', version: '7', platform: 'OS X 10.9' }
 
@@ -59,7 +59,7 @@ define({
     ],
 
 	// Maximum number of simultaneous integration tests that should be executed on the remote WebDriver service
-	maxConcurrency: 6,
+	maxConcurrency: 1,
 
 	// Name of the tunnel class to use for WebDriver tests
 //    tunnel : 'NullTunnel',
@@ -97,6 +97,7 @@ define({
 //          'myPackage/tests/functional/browserify',
 //          'myPackage/tests/functional/routes',
 //          'myPackage/tests/functional/fitzroy',
+//          'myPackage/tests/functional/shimmed',
           'myPackage/tests/functional/all'
 
       ],
